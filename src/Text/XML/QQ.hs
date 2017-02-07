@@ -16,5 +16,15 @@ module Text.XML.QQ
   , Document
   ) where
 
-xml :: QuasiQuote
-xml = undefined
+xml :: QuasiQuoter
+xml = QuasiQuoter
+  { quoteExp = lala
+  , quotePat = error "not used"
+  , quoteType = error "not used"
+  , quoteDec = error "not used"
+  }
+
+lala :: String -> Q Exp
+lala string = do
+  exp <- compileFromString textSetting string
+  undefined
