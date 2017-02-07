@@ -16,6 +16,10 @@ module Text.XML.QQ
   , Document
   ) where
 
+import Language.Haskell.TH (Q, Exp)
+import Language.Haskell.TH.Quote (QuasiQuoter(..))
+import Text.Heterocephalus (compileFromString, textSetting)
+
 xml :: QuasiQuoter
 xml = QuasiQuoter
   { quoteExp = lala
