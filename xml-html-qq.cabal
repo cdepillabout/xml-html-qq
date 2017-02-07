@@ -1,0 +1,49 @@
+name:                xml-html-qq
+version:             0.1.0.0
+synopsis:            Quasi-quoters for XML and HTML
+description:         Please see <https://github.com/cdepillabout/xml-html-qq#readme README.md>.
+homepage:            https://github.com/cdepillabout/xml-html-qq
+license:             BSD3
+license-file:        LICENSE
+author:              Dennis Gosnell
+maintainer:          cdep.illabout@gmail.com
+copyright:           2017 Dennis Gosnell
+category:            Text
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Text.Pretty.Simple
+                     , Text.Pretty.Simple.Internal
+                     , Text.Pretty.Simple.Internal.Color
+                     , Text.Pretty.Simple.Internal.Expr
+                     , Text.Pretty.Simple.Internal.ExprParser
+                     , Text.Pretty.Simple.Internal.ExprToOutput
+                     , Text.Pretty.Simple.Internal.Output
+                     , Text.Pretty.Simple.Internal.OutputPrinter
+  build-depends:       base >= 4.8 && < 5
+                     , ansi-terminal >= 0.6
+                     , containers >= 0.5
+                     , mtl >= 2.2
+                     , parsec >= 3.1
+                     , text >= 1.2
+                     , transformers >= 0.4
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+  other-extensions:    TemplateHaskell
+
+test-suite xml-html-qq-doctest
+  type:                exitcode-stdio-1.0
+  main-is:             DocTest.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , doctest
+                     , Glob
+  default-language:    Haskell2010
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+
+source-repository head
+  type:     git
+  location: git@github.com:cdepillabout/xml-html-qq.git
