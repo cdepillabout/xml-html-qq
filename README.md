@@ -8,4 +8,4 @@ Text.XML.QQ and Text.HTML.QQ
 [![Stackage Nightly](http://stackage.org/package/xml-html-qq/badge/nightly)](http://stackage.org/nightly/package/xml-html-qq)
 ![BSD3 license](https://img.shields.io/badge/license-BSD3-blue.svg)
 
-`xml-html-qq` provides quasi-quoters for XML and HTML documents.
+`xml-html-qq` provides quasi-quoters for XML and HTML `Document`s.
