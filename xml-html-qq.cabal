@@ -15,13 +15,17 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Text.XML.QQ
+  exposed-modules:     Text.HTML.QQ
+                     , Text.XML.QQ
                      , Text.XMLHTML.Internal
   build-depends:       base >= 4.8 && < 5
                      , blaze-markup
+                     , conduit
                      , data-default
                      , from-sum
                      , heterocephalus >= 1.0.4.0
+                     , html-conduit
+                     , resourcet
                      , template-haskell
                      , text
                      , th-lift

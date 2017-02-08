@@ -11,16 +11,22 @@ Maintainer  :  Dennis Gosnell (cdep.illabout@gmail.com)
 Stability   :  experimental
 Portability :  unknown
 
-This module provides a quasi-quoter for XML 'Document's.  See the 'xml' function for some examples.
+This module provides a quasi-quoter for XML 'Document's.  See the 'xml'
+function for some examples.
+
+
 -}
 
 module Text.XML.QQ
   ( xml
   , xmlUnsafe
   , xmlRaw
+    -- * Types
   , Document
+  , SomeException
   ) where
 
+import Control.Exception (SomeException)
 import Control.FromSum (fromEither)
 import Data.Default (def)
 import Data.Text.Lazy (pack)
