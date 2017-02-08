@@ -21,7 +21,7 @@ library
                      , blaze-markup
                      , data-default
                      , from-sum
-                     , heterocephalus
+                     , heterocephalus >= 1.0.4.0
                      , template-haskell
                      , text
                      , th-lift
