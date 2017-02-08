@@ -1,6 +1,4 @@
-{-# LANGUAGE DeriveLift #-}
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 {- |
@@ -36,6 +34,9 @@ import Text.XML (Document(..), parseText)
 import Text.XMLHTML.Internal
        (createExpQuasiQuoter, handleParseDocErr)
 
+-- | This 'QuasiQuoter' produces XML 'Document's.
+--
+-- The type of an expression that this 'QuasiQuoter' produces is @'Either' 'SomeException' 'Document'@.  It produces a @'Left' 'SomeException'@ when the document cannot be parsed.
 xml :: QuasiQuoter
 xml =
   createExpQuasiQuoter $ \string ->
