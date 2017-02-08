@@ -14,7 +14,17 @@ Portability :  unknown
 This module provides a quasi-quoter for XML 'Document's.  See the 'xml'
 function for some examples.
 
+The difference between "Text.XML.QQ" and "Text.HTML.QQ" is the function that is
+used to parse the input 'String' into a 'Document'.
 
+'Text.XML.QQ.xml' uses 'Text.XML.parseText' to parse the input 'String'.
+'Text.XML.parseText' returns an error on a malformed document.  This is
+generally what you want for XML documents.
+
+'Text.HTML.QQ.html' uses 'Text.HTML.DOM'.parseLT' to parse the input 'String'.
+'Text.HTML.DOM.parseLT' will parse any HTML document, skipping parts of the
+document that are malformed.  This is generally what you want for HTML
+documents.
 -}
 
 module Text.XML.QQ
@@ -68,7 +78,7 @@ import Text.XMLHTML.Internal
 -- >>> [xml|<html>#{a}</html>|]
 -- Right ...
 --
--- Here's an example of a template that will produce a 'Left' value:
+-- Here's an example of invalue XML that will produce a 'Left' value:
 --
 -- >>> [xml|<html </html>|]
 -- Left ...
@@ -108,4 +118,7 @@ xmlRaw :: QuasiQuoter
 xmlRaw =
   createExpQuasiQuoter $ \string ->
     let eitherDoc = parseText def $ pack string
-    in either (handleParseDocErr "XML" "Text.XML.parseText" string) lift eitherDoc
+    in either
+         (handleParseDocErr "XML" "Text.XML.parseText" string)
+         lift
+         eitherDoc

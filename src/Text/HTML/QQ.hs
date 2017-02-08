@@ -14,7 +14,8 @@ Portability :  unknown
 This module provides a quasi-quoter for HTML 'Document's.  See the 'html'
 function for some examples.
 
-
+See "Text.XML.QQ" for an explanation of the difference between "Text.HTML.QQ"
+and "Text.XML.QQ".
 -}
 
 module Text.HTML.QQ
@@ -42,10 +43,7 @@ import Text.XMLHTML.Internal (createExpQuasiQuoter)
 
 -- | This 'QuasiQuoter' produces HTML 'Document's.
 --
--- This 'QuasiQuoter' produces expressions of type
--- @'Either' 'SomeException' 'Document'@.  It produces a
--- @'Left' 'SomeException'@ when the input string cannot be parsed into an HTML
--- 'Document'.
+-- This 'QuasiQuoter' produces expressions of type 'Document'.
 --
 -- Here's a simple example of using it:
 --
@@ -63,7 +61,7 @@ import Text.XMLHTML.Internal (createExpQuasiQuoter)
 -- >>> [html|<html>#{a}</html>|]
 -- Document ...
 --
--- Even invalid HTML still parse.
+-- Even invalid HTML will still parse.
 --
 -- >>> [html|<html </html>|]
 -- Document ...

@@ -4,10 +4,11 @@
 
 module Main where
 
-import Control.Exception (SomeException)
+import Data.Text (Text)
 import Test.Tasty (TestTree, defaultMain, testGroup)
 import Test.Tasty.HUnit ((@?=), testCase)
-import Text.XML (Document(..), Element(..), Prologue(..))
+import Text.XML
+       (Document(..), Element(..), Name(..), Node(..), Prologue(..))
 
 import Text.XML.QQ (xmlRaw, xmlUnsafe)
 
@@ -15,28 +16,59 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "tests" [formTests]
+tests = testGroup "tests" [xmlTests]
 
-formTests :: TestTree
-formTests = testGroup "form" [formWorks]
+xmlTests :: TestTree
+xmlTests = testGroup "xml" [xmlUnsafeTests, xmlRawTests]
 
-formWorks :: TestTree
-formWorks =
-  testCase "works correctly" $
-  test @?=
-  Document
-  { documentPrologue =
-      Prologue
-      {prologueBefore = [], prologueDoctype = Nothing, prologueAfter = []}
-  , documentRoot =
-      Element
-      {elementName = "html", elementAttributes = mempty, elementNodes = []}
-  , documentEpilogue = []
-  }
+xmlUnsafeTests :: TestTree
+xmlUnsafeTests = testGroup "xmlUnsafe" [xmlUnsafeWorksCorrectly]
 
--- test :: Either SomeException Document
-test :: Document
-test = [xmlUnsafe|<html></html>|]
+xmlUnsafeWorksCorrectly :: TestTree
+xmlUnsafeWorksCorrectly = testCase "works correctly" $ doc @?= expectedDoc
+  where
+    doc :: Document
+    doc =
+      let a = "hello" :: Text
+      in [xmlUnsafe|<html>#{a}</html>|]
 
-test2 :: Document
-test2 = [xmlRaw|<html></html>|]
+    expectedDoc :: Document
+    expectedDoc =
+      Document
+      { documentPrologue =
+          Prologue
+          {prologueBefore = [], prologueDoctype = Nothing, prologueAfter = []}
+      , documentRoot =
+          Element
+          { elementName =
+              Name
+              { nameLocalName = "html"
+              , nameNamespace = Nothing
+              , namePrefix = Nothing
+              }
+          , elementAttributes = mempty
+          , elementNodes = [NodeContent "hello"]
+          }
+      , documentEpilogue = []
+      }
+
+xmlRawTests :: TestTree
+xmlRawTests = testGroup "xmlRaw" [xmlRawWorksCorrectly]
+
+xmlRawWorksCorrectly :: TestTree
+xmlRawWorksCorrectly = testCase "works correctly" $ doc @?= expectedDoc
+  where
+    doc :: Document
+    doc = [xmlRaw|<html></html>|]
+
+    expectedDoc :: Document
+    expectedDoc =
+      Document
+      { documentPrologue =
+          Prologue
+          {prologueBefore = [], prologueDoctype = Nothing, prologueAfter = []}
+      , documentRoot =
+          Element
+          {elementName = "html", elementAttributes = mempty, elementNodes = []}
+      , documentEpilogue = []
+      }
