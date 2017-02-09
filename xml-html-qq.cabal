@@ -1,5 +1,5 @@
 name:                xml-html-qq
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Quasi-quoters for XML and HTML Documents
 description:         Please see <https://github.com/cdepillabout/xml-html-qq#readme README.md>.
 homepage:            https://github.com/cdepillabout/xml-html-qq
