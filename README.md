@@ -9,3 +9,6 @@ Text.XML.QQ and Text.HTML.QQ
 ![BSD3 license](https://img.shields.io/badge/license-BSD3-blue.svg)
 
 `xml-html-qq` provides quasi-quoters for XML and HTML `Document`s.
+
+For documentation and usage examples, see the
+[documentation](https://hackage.haskell.org/package/xml-html-qq) on Hackage.
