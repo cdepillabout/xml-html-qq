@@ -64,7 +64,7 @@ import Text.XMLHTML.Internal
 --
 -- Here's a simple example of using it:
 --
--- >>> [xml|<html></html>|]
+-- >>> [xml|<html></html>|] :: Either SomeException Document
 -- Right (Document {documentPrologue = Prologue {prologueBefore = [], prologueDoctype = Nothing, prologueAfter = []}, documentRoot = Element {elementName = Name {nameLocalName = "html", nameNamespace = Nothing, namePrefix = Nothing}, elementAttributes = fromList [], elementNodes = []}, documentEpilogue = []})
 --
 -- Internally, this function is using the
@@ -99,8 +99,13 @@ xml =
 -- If your input string cannot be parsed into a valid 'Document', an error will
 -- be thrown at runtime with 'error'.
 --
--- This function is nice to use in GHCi or tests, but should not be used in
+-- This function is nice to use in GHCi or tests, but should __NOT__ be used in
 -- production code.
+--
+-- Here's a simple example of using it:
+--
+-- >>> [xmlUnsafe|<html></html>|] :: Document
+-- Document ...
 xmlUnsafe :: QuasiQuoter
 xmlUnsafe =
   createExpQuasiQuoter $ \string ->
@@ -114,6 +119,13 @@ xmlUnsafe =
 --
 -- An error will be thrown at compile-time if the input string cannot be parsed
 -- into a 'Document'.
+--
+-- Unlike 'xmlUnsafe', this function is safe to use in production code.
+--
+-- Here's a simple example of using it:
+--
+-- >>> [xmlRaw|<html></html>|] :: Document
+-- Document ...
 xmlRaw :: QuasiQuoter
 xmlRaw =
   createExpQuasiQuoter $ \string ->

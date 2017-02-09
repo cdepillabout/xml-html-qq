@@ -47,7 +47,7 @@ import Text.XMLHTML.Internal (createExpQuasiQuoter)
 --
 -- Here's a simple example of using it:
 --
--- >>> [html|<html></html>|]
+-- >>> [html|<html></html>|] :: Document
 -- Document {documentPrologue = Prologue {prologueBefore = [], prologueDoctype = Nothing, prologueAfter = []}, documentRoot = Element {elementName = Name {nameLocalName = "html", nameNamespace = Nothing, namePrefix = Nothing}, elementAttributes = fromList [], elementNodes = []}, documentEpilogue = []}
 --
 -- Internally, this function is using the
@@ -79,5 +79,10 @@ html =
 -- | This function is the same as 'html', but doesn't allow variable
 -- interpolation or control statements.  It also produces expressions of type
 -- 'Document'.
+--
+-- Here's a simple example of using it:
+--
+-- >>> [htmlRaw|<html></html>|] :: Document
+-- Document ...
 htmlRaw :: QuasiQuoter
 htmlRaw = createExpQuasiQuoter $ lift . parseLT . pack
