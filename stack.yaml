@@ -1,16 +1,14 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-7.19
+resolver: lts-12.1
 
 # Local packages, usually specified by relative directory name
 packages:
 - '.'
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
-extra-deps:
-- from-sum-0.2.1.0
-- heterocephalus-1.0.4.0
+extra-deps: []
 
 # Override default flag values for local packages and extra-deps
 flags: {}
@@ -41,3 +39,8 @@ extra-package-dbs: []
 # This has been disabled because of the following exchange:
 # https://github.com/cdepillabout/pretty-simple/pull/1#issuecomment-272706215
 #pvp-bounds: both
+
+nix:
+    packages: []
+    pure: true
+    shell-file: shell.nix
