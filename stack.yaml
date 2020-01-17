@@ -41,6 +41,6 @@ extra-package-dbs: []
 #pvp-bounds: both
 
 nix:
-    packages: []
+    packages:
+    - zlib
     pure: true
-    shell-file: shell.nix
